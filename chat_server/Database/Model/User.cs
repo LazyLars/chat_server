@@ -6,20 +6,22 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
-namespace chat_server
+namespace chat_server.Database.Model
 {
     [Table("Users")]
-    class User
+    public class User
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         [Required]
-        public IPAddress IpAdress { get; set; }
+        public string IpAdress { get; set; }
         [Required]
         public string Username { get; set; }
         [Required]
         public DateTime GeneratedAt { get; set; }
         public string Password { get; set; }
+
+        public ICollection<ChatBacklog> ChatBacklog { get; set; }
 
     }
 }

@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
+using chat_server.Database;
+using System.Net;
 
 namespace chat_server
 {
@@ -18,6 +20,10 @@ namespace chat_server
         public GuiServer()
         {
             InitializeComponent();
+
+            var db = new ServerDbContext();
+            if(!db.Database.Exists())
+                db.Users.Add(new Database.Model.User() {IpAdress = "127.0.0.0", Username = "Supervisor", GeneratedAt = DateTime.Now });
         }
 
         private void btnStartServer_Click(object sender, EventArgs e)
